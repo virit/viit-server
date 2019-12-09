@@ -1,0 +1,158 @@
+<template>
+    <div class="app-container">
+        <el-card shadow="hover">
+            <div slot="header" shaow="never">
+                <el-button @click="handleAdd" class="filter-item mb-20" type="primary">新增用户</el-button>
+                <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="输入查询：">
+                        <el-input style="width:200px;"  v-model="listQuery.fields.typeName" placeholder="请输入角色类型" autocomplete="off" @clear="clearSearch" clearable></el-input>
+                        <el-button @click="handleSearch" type="primary">查询</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <el-table :data="roleList" v-loading="tabLoading" border>
+                <el-table-column type="index"/>
+                <el-table-column label="角色名称" prop="name"></el-table-column>
+                <el-table-column label="角色标识" prop="code"></el-table-column>
+                <el-table-column label="角色类型" prop="typeId">
+                    <template slot-scope="scope"> {{ formatTypeId(scope.row.typeId) }} </template>
+                </el-table-column>
+                <el-table-column label="创建时间" prop="createDate"></el-table-column>
+                <el-table-column label="更新时间" prop="updateDate"></el-table-column>
+                <el-table-column label="描述" prop="description"></el-table-column>
+                <el-table-column label="操作" width="280px">
+                    <el-button-group slot-scope="scope">
+                        <el-button type="text" @click="handleOption('edit', scope.row)" icon="el-icon-edit">编辑</el-button>
+                        <el-button type="text" @click="handleOption('delete', scope.row)" icon="el-icon-delete">删除</el-button>
+                        <el-button type="text" @click="assignPermission(scope.row)"><svg-icon icon-class="permission" class="fs-16"/>分配权限 </el-button>
+                    </el-button-group>
+                </el-table-column>
+            </el-table>
+            <pagination :size.sync="listQuery.page.size"
+                        :page.sync="listQuery.page.current"
+                        :total="total"
+                        @pagination="pageSizeChange"/>
+        </el-card>
+        <add-role-dialog :type="dialogTitleType" :roleInfo="roleInfo" v-model="dialogShow.roleAdd" @submitSuccess="dialogClosed"/>
+        <assign-permission-dialog :menuData="menuData" :roleInfo="roleInfo" v-model="dialogShow.assignPermission" @submitSuccess="dialogClosed"/>
+    </div>
+</template>
+
+<script>
+    import { UrlPath } from '@/static/url-path';
+    import * as RESTful from '@/api';
+    import Pagination from '@/components/Pagination' // 基于分页的二级包装
+    import AddRoleDialog from './components/addRoleDialog'
+    import assignPermissionDialog from './components/assignPermissionDialog'
+    import { mapGetters } from 'vuex';
+
+    export default {
+        name: 'RoleManagement',
+        components: { Pagination, AddRoleDialog, assignPermissionDialog },
+        data() {
+            return {
+                menuData: [], // 菜单数据
+                tabLoading: false,
+                roleList: [],
+                total: 0,
+                dialogTitleType: '',
+                listQuery: {
+                    fields: {
+                        typeName: ''
+                    },
+                    page: {
+                        current: 1,
+                        size: 10,
+                    },
+                },
+                dialogShow: {
+                    roleAdd: false,
+                    assignPermission: false,
+                },
+                roleInfo: {},
+            }
+        },
+        computed: {
+            ...mapGetters(['roleTypeList']),
+        },
+        created() {
+            this.initPageData();
+        },
+        methods: {
+            async getMenuData() {
+        try {
+            const res = await RESTful.get(UrlPath.MENU_MANAGER + "/tree");
+            this.menuData = res.data;
+        } catch (error) {}
+    },
+    clearSearch() {
+        this.listQuery.page.current = 1;
+        this.getRoleList();
+    },
+    async getRoleList() {
+        try {
+            this.tabLoading = true;
+            const res = await RESTful.get(UrlPath.ROLE_MANAGER, this.listQuery);
+            this.tabLoading = false;
+            this.roleList = res.data.records;
+            this.total = res.data.total;
+        } catch (error) {
+            this.tabLoading = false;
+        }
+    },
+    handleSearch() {
+        this.listQuery.page.current = 1;
+        this.getRoleList();
+    },
+    pageSizeChange(pageInfo) {
+        this.listQuery.page.current = pageInfo.page;
+        this.listQuery.page.size = pageInfo.limit;
+        this.getRoleList()
+    },
+    initPageData() {
+        this.getRoleList();
+        this.$store.dispatch('role/getRoleTypeList');
+        this.getMenuData();
+    },
+    handleAdd() {
+        this.roleInfo = {};
+        this.dialogTitleType = 'add';
+        this.dialogShow.roleAdd = true
+    },
+    dialogClosed() {
+        this.getRoleList();
+    },
+    async handleOption(type, roleInfo) {
+        switch (type) {
+            case 'edit':
+                const res = await RESTful.getById(UrlPath.ROLE_MANAGER, roleInfo.id);
+                this.dialogTitleType = 'edit';
+                this.dialogShow.roleAdd = true;
+                this.roleInfo = res.data;
+                break;
+            case 'delete':
+                this.$confirm('是否确定删除该角色类型？', '删除确认').then(async () => {
+                    await RESTful.del(UrlPath.ROLE_MANAGER, roleInfo.id);
+                this.$message.success("删除成功！");
+                if (this.total === this.listQuery.page.size+1 && this.listQuery.page.current > 1) {
+                    this.listQuery.page.current = this.listQuery.page.current - 1;
+                }
+                this.getRoleList();
+        })
+        break;
+    default:
+        return void 0;
+    }
+    },
+    formatTypeId(id) { // 格式化typeid显示为名字
+        const findRes = this.roleTypeList.find(v => v.id === id);
+        return findRes ? findRes.typeName : '--';
+    },
+    async assignPermission(row) {
+        const res = await RESTful.getById(UrlPath.ROLE_MANAGER, row.id);
+        this.roleInfo = res.data;
+        this.dialogShow.assignPermission = true;
+    }
+    }
+    }
+</script>

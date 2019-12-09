@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://viitapitest.virit.top:3306/viit_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    username: viit_test
+    password: 159874
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    url: redis://localhost:6379
+    database: 7
+  session:
+    store-type: redis
+    timeout: -1
+  activiti:
+    # 自动建表
+    database-schema: ACTIVITI
+    database-schema-update: false
+    history-level: full
+    db-history-used: true
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: jdbc
+      #初始化表结构
+      #jdbc:
+    #initialize-schema: never
+server:
+  servlet:
+    context-path: /api
