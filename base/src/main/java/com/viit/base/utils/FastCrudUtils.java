@@ -2,6 +2,8 @@ package com.viit.base.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.viit.base.constant.SystemColumn;
+import com.viit.base.constant.SystemField;
 import com.viit.base.lang.entity.IdEntity;
 import com.viit.base.modelview.*;
 import org.springframework.validation.BindingResult;
@@ -78,6 +80,7 @@ public class FastCrudUtils {
      * @return json视图
      */
     public static <T extends IdEntity> RestData page(PageQuery<T> query, IService<T> service) {
+        query.getWrapper().orderByDesc(SystemColumn.CREATE_DATE);
         if (query.getPage() != null) {
             IPage<T> list = service.page(query.getPage(), query.getWrapper());
             return new PageData<>(list);

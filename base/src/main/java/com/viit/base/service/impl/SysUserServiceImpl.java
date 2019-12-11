@@ -1,7 +1,6 @@
 package com.viit.base.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.viit.base.config.SystemConfig;
 import com.viit.base.entity.SysMenu;
 import com.viit.base.entity.SysRole;
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional(readOnly = false, rollbackFor = Exception.class)
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     private final PasswordEncoder passwordEncoder;
 

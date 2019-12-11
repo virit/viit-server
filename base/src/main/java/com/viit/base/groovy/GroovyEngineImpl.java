@@ -20,20 +20,7 @@ import java.lang.reflect.Method;
 @Service
 public class GroovyEngineImpl implements GroovyEngine {
 
-    private final Binding binding;
-
-    private GroovyShell groovyShell;
-
     private static final String DEFAULT_METHOD = "run";
-
-    public GroovyEngineImpl(Binding binding) {
-        this.binding = binding;
-        GroovyClassLoader groovyClassLoader = new GroovyClassLoader(this.getClass().getClassLoader());
-        CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
-        compilerConfiguration.setSourceEncoding("utf-8");
-        compilerConfiguration.setScriptBaseClass(ScriptRunner.class.getName());
-        groovyShell = new GroovyShell(groovyClassLoader, binding, compilerConfiguration);
-    }
 
     @Override
     public Object runScript(String groovyScript, String methodName) throws InvocationTargetException, IllegalAccessException,

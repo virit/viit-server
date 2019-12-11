@@ -12,10 +12,6 @@ import java.util.*;
  */
 public class SuperUser extends SysUser {
 
-    private String username;
-
-    private String password;
-
     public static final String SUPER = "super";
     public static final String ROLE_SUPER = "ROLE_SUPER";
 

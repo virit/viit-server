@@ -33,18 +33,18 @@ public class SysUser extends IdEntity implements UserDetails {
     @JsonView(BaseProfile.class)
     @NotBlank(groups = {SysUserGroups.NamePass.class})
     @Size(max = 16, groups = {SysUserGroups.NamePass.class})
-    private String username;
+    protected String username;
     /**
      * 密码
      */
     @NotBlank(groups = {SysUserGroups.NamePass.class})
     @Size(max = 16, groups = {SysUserGroups.NamePass.class})
-    private String password;
+    protected String password;
     /**
      * 头像
      */
     @JsonView(BaseProfile.class)
-    private String avatar;
+    protected String avatar;
 
     @JsonView(BaseProfile.class)
     @TableField(exist = false)
