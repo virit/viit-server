@@ -9,6 +9,7 @@ import com.viit.base.entity.SysDictItem;
 import com.viit.base.mapper.SysDictItemMapper;
 import com.viit.base.service.SysDictItemService;
 import com.viit.base.service.SysDictService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +26,7 @@ import java.util.Optional;
 @Transactional(rollbackFor = Exception.class)
 public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDictItem> implements SysDictItemService {
 
-    private final SysDictService sysDictService;
-
-    public SysDictItemServiceImpl(SysDictService sysDictService) {
-        this.sysDictService = sysDictService;
-    }
+    private SysDictService sysDictService;
 
     @Override
     public List<SysDictItem> list(Wrapper<SysDictItem> wrapper) {
@@ -50,5 +47,10 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
         dictItemQuery.setDictId(dictId);
         QueryWrapper<SysDictItem> dictItemQueryWrapper = new QueryWrapper<>(dictItemQuery);
         return this.list(dictItemQueryWrapper);
+    }
+
+    @Autowired
+    public void setSysDictService(SysDictService sysDictService) {
+        this.sysDictService = sysDictService;
     }
 }

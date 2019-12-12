@@ -42,11 +42,6 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     }
 
     @Override
-    public IPage<SysMessage> page(IPage<SysMessage> page, Wrapper<SysMessage> queryWrapper) {
-        return super.page(page, queryWrapper);
-    }
-
-    @Override
     public List<SysMessage> list(Wrapper<SysMessage> queryWrapper) {
         return super.list(queryWrapper);
     }

@@ -55,15 +55,15 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     }
 
     @Override
-    public IPage<Department> page(IPage<Department> page, Wrapper<Department> queryWrapper) {
-        IPage<Department> resultPage = super.page(page, queryWrapper);
+    public <E extends IPage<Department>> E page(E page, Wrapper<Department> queryWrapper) {
+        E resultPage = super.page(page, queryWrapper);
         resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
         return resultPage;
     }
 
     @Override
-    public IPage<Department> page(IPage<Department> page) {
-        IPage<Department> resultPage = super.page(page);
+    public <E extends IPage<Department>> E page(E page) {
+        E resultPage = super.page(page);
         resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
         return resultPage;
     }

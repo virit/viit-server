@@ -3,6 +3,8 @@ package com.viit.base.lang.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.viit.base.modelview.BaseProfile;
 
@@ -16,7 +18,7 @@ import java.util.Map;
  * @author chentao
  * @version 2019-10-28
  */
-public class BaseEntity implements Entity, IExtendable {
+public class BaseEntity extends Model<BaseEntity> implements Entity, IExtendable {
 
     @JsonView(BaseProfile.class)
     protected String createUserId;
@@ -29,12 +31,15 @@ public class BaseEntity implements Entity, IExtendable {
     protected Date createDate;
 
     @JsonView(BaseProfile.class)
-    @TableField(fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     protected Date updateDate;
 
     @TableField(exist = false)
     @JsonView(BaseProfile.class)
     protected Map<String, Object> infoFields;
+
+    @TableLogic
+    protected Integer deleted;
 
     @Override
     public void setCreateUserId(String userId) {

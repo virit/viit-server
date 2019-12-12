@@ -37,7 +37,7 @@
         <commons-net.version>3.6</commons-net.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <activiti-dependencies.version>7.1.0.M5</activiti-dependencies.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <mybatis-plus.version>3.3.0</mybatis-plus.version>
     </properties>
 
 <!--    <dependencyManagement>-->

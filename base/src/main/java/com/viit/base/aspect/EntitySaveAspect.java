@@ -18,8 +18,8 @@ import java.util.List;
  * @author chentao
  * @version 2019-10-28
  */
-@Aspect
-@Component
+// @Aspect
+// @Component
 public class EntitySaveAspect {
 
     private void entityInsertSetter(Entity entity) {

@@ -32,6 +32,10 @@ public enum ResultCode {
      */
     USERNAME_OR_PASSWORD_ERROR(4002, "用户名或密码错误"),
     /**
+     * 用户名或密码错误
+     */
+    USERNAME_EXISTENCE(4003, "用户名已存在"),
+    /**
      * 用户未认证
      */
     UNAUTHORIZED(4010, "用户未认证"),

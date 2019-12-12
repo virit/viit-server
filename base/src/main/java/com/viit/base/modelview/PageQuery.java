@@ -23,7 +23,12 @@ public class PageQuery<T> {
      */
     private Page<T> page;
 
+    private QueryWrapper<T> wrapper;
+
     public QueryWrapper<T> getWrapper() {
-        return new QueryWrapper<>(fields);
+        if (wrapper == null) {
+            wrapper = new QueryWrapper<>(fields);
+        }
+        return wrapper;
     }
 }

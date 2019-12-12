@@ -20,6 +20,21 @@ public abstract class FieldsInjectServiceImpl<M extends BaseMapper<T>, T> extend
     public abstract List<T> infoFieldsInject(List<T> list);
 
     @Override
+    public <E extends IPage<T>> E page(E page, Wrapper<T> queryWrapper) {
+        IPage<T> resultPage = super.page(page, queryWrapper);
+        resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
+        return super.page(page, queryWrapper);
+    }
+
+    @Override
+    public <E extends IPage<T>> E page(E page) {
+        E resultPage = super.page(page);
+        resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
+        return resultPage;
+    }
+
+    /*
+    @Override
     public IPage<T> page(IPage<T> page, Wrapper<T> queryWrapper) {
         IPage<T> resultPage = super.page(page, queryWrapper);
         resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
@@ -31,7 +46,7 @@ public abstract class FieldsInjectServiceImpl<M extends BaseMapper<T>, T> extend
         IPage<T> resultPage = super.page(page);
         resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
         return resultPage;
-    }
+    }*/
 
     @Override
     public List<T> list(Wrapper<T> queryWrapper) {

@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * 默认填充类
+ *
+ * @author virit
+ * @version 2019-12-12
+ */
 @Component
 public class DefaultMetaObjectHandler implements MetaObjectHandler {
 

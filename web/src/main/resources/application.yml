@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: test
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -44,7 +44,7 @@ spring:
 server:
   servlet:
     context-path: /api
-  port: 8081
+  port: 8080
 system:
   username: super
   password: 123456
@@ -52,7 +52,7 @@ system:
 spring:
   profiles: dev
   redis:
-    url: redis://47.101.155.230:6379
+    url: redis://127.0.0.1:6379
     database: 1
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -64,12 +64,17 @@ system:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted  #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 ---
 spring:
   profiles: test
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/viit_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    url: jdbc:mysql://127.0.0.1:3306/viit_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: viit_test
     password: 159874
   attachServer: /home/attachs

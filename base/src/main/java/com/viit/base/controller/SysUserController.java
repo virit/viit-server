@@ -2,13 +2,11 @@ package com.viit.base.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.viit.base.entity.SysUser;
-import com.viit.base.modelview.BaseProfile;
-import com.viit.base.modelview.PageQuery;
-import com.viit.base.modelview.RestData;
-import com.viit.base.modelview.SimpleRestData;
+import com.viit.base.modelview.*;
 import com.viit.base.service.SysUserService;
 import com.viit.base.utils.ContextUtils;
 import com.viit.base.utils.FastCrudUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -37,7 +35,18 @@ public class SysUserController {
     @PreAuthorize("withAuthority('sys:user:insert')")
     public RestData save(@RequestBody @Validated SysUser sysUser, BindingResult bindingResult) {
 
-        return FastCrudUtils.save(sysUser, sysUserService, bindingResult);
+        SysUser userInDb = sysUserService.getOneByUsername(sysUser.getUsername());
+        if (userInDb != null) {
+            return new SimpleRestData().resultCode(ResultCode.USERNAME_EXISTENCE);
+        }
+        if (bindingResult.hasErrors()) {
+            return new FormErrorData(bindingResult);
+        }
+        boolean result = sysUserService.save(sysUser);
+        if (result) {
+            return new KeyValueData().put("id", sysUser.getId());
+        }
+        return new SimpleRestData().resultCode(ResultCode.ERROR);
     }
 
     /**
@@ -56,7 +65,19 @@ public class SysUserController {
     @PreAuthorize("withAuthority('sys:user:update')")
     public RestData update(@PathVariable("id") String id, @RequestBody @Validated SysUser sysUser, BindingResult bindingResult) {
         sysUser.setId(id);
-        return FastCrudUtils.update(sysUser, sysUserService, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return new FormErrorData(bindingResult);
+        }
+        // 检查用户名重复
+        SysUser userInDb = sysUserService.getOneByUsername(sysUser.getUsername());
+        if (userInDb != null && !StringUtils.equals(userInDb.getId(), id)) {
+            return new SimpleRestData().resultCode(ResultCode.USERNAME_EXISTENCE);
+        }
+        if (sysUserService.updateById(sysUser)) {
+            return new SimpleRestData<>();
+        } else {
+            return new SimpleRestData().resultCode(ResultCode.ERROR);
+        }
     }
 
     /**

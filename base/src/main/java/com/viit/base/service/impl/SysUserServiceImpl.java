@@ -43,7 +43,8 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 
     private final SystemConfig systemConfig;
 
-    public SysUserServiceImpl(PasswordEncoder passwordEncoder, SysUserRoleService sysUserRoleService, SysRoleService sysRoleService, SysMenuService sysMenuService, SystemConfig systemConfig) {
+    public SysUserServiceImpl(PasswordEncoder passwordEncoder, SysUserRoleService sysUserRoleService,
+                              SysRoleService sysRoleService, SysMenuService sysMenuService, SystemConfig systemConfig) {
         this.passwordEncoder = passwordEncoder;
         this.sysUserRoleService = sysUserRoleService;
         this.sysRoleService = sysRoleService;
@@ -52,9 +53,9 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
     }
 
     private void handleSave(SysUser sysUser) {
-        // 删除已有的配置
-        sysUserRoleService.removeByUserId(sysUser.getId());
         if (sysUser.getRoleIdList() != null) {
+            // 删除已有的配置
+            sysUserRoleService.removeByUserId(sysUser.getId());
             // 插入中间表
             List<SysUserRole> userRoles = sysUser.getRoleIdList().stream().map(id -> {
                 SysUserRole userRole = new SysUserRole();
@@ -97,10 +98,6 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
         query.setUsername(username);
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>(query).eq("username", username);
         SysUser user =  this.getOne(queryWrapper);
-        if (!(systemConfig.getSuperUsername().equals(user.getId()))) {
-            user.setAuthorities(getUserAuthorities(user.getId()));
-            user.setRoleIdList(sysUserRoleService.listRoleIdByUserId(user.getId()));
-        }
         return user;
     }
 
@@ -113,6 +110,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
         return user;
     }
 
+    @Override
     public List<GrantedAuthority> getUserAuthorities(String userId) {
         // 获取用户角色
         List<SysRole> userRoles = sysRoleService.listByUserId(userId);
