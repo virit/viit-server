@@ -1,9 +1,9 @@
 package com.viit.base.controller;
 
-import com.viit.base.enums.SysEnumItem;
+import com.viit.base.constants.SysEnumItem;
 import com.viit.base.modelview.RestData;
 import com.viit.base.modelview.SimpleRestData;
-import com.viit.base.enums.SysMenuType;
+import com.viit.base.constants.SysMenuType;
 import com.viit.base.utils.EasyMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

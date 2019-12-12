@@ -19,7 +19,7 @@ public class IdEntity extends BaseEntity {
      */
     @TableId(type = IdType.UUID)
     @JsonView(BaseProfile.class)
-    private String id;
+    protected String id;
 
     public String getId() {
         return id;

@@ -2,7 +2,7 @@ package com.viit.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.viit.base.entity.SysDict;
-import com.viit.base.enums.IDictCode;
+import com.viit.base.constants.IDictCode;
 import com.viit.base.utils.SysDictGather;
 
 /**

@@ -6,7 +6,7 @@ import com.viit.base.entity.SysMenu;
 import com.viit.base.entity.SysRole;
 import com.viit.base.entity.SysUser;
 import com.viit.base.entity.SysUserRole;
-import com.viit.base.enums.SysMenuType;
+import com.viit.base.constants.SysMenuType;
 import com.viit.base.mapper.SysUserMapper;
 import com.viit.base.service.SysMenuService;
 import com.viit.base.service.SysRoleService;
@@ -95,7 +95,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
     public SysUser getOneByUsername(String username) {
         SysUser query = new SysUser();
         query.setUsername(username);
-        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>(query);
+        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>(query).eq("username", username);
         SysUser user =  this.getOne(queryWrapper);
         if (!(systemConfig.getSuperUsername().equals(user.getId()))) {
             user.setAuthorities(getUserAuthorities(user.getId()));
@@ -108,7 +108,6 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
     public SysUser getById(Serializable id) {
         SysUser user = super.getById(id);
         if (!(systemConfig.getSuperUsername().equals(id))) {
-            user.setAuthorities(getUserAuthorities(user.getId()));
             user.setRoleIdList(sysUserRoleService.listRoleIdByUserId(user.getId()));
         }
         return user;

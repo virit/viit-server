@@ -37,7 +37,7 @@ public class EntitySaveAspect {
     /**
      * 切入点
      */
-    @Before("execution(* com.viit..*.*Service.saveBatch(..))")
+    // @Before("execution(* com.viit..*.*Service.saveBatch(..))")
     public void doBeforeSaveBatch(JoinPoint point) {
         Object[] args = point.getArgs();
         // 判断参数存在
@@ -47,7 +47,7 @@ public class EntitySaveAspect {
         }
     }
 
-    @Before("execution(* com.viit..*.*Mapper.insert(..))")
+    // @Before("execution(* com.viit..*.*Mapper.insert(..))")
     public void doBeforeInsert(JoinPoint point) {
         Object[] args = point.getArgs();
         // 判断参数存在
@@ -57,7 +57,7 @@ public class EntitySaveAspect {
         }
     }
 
-    @Before("execution(* com.viit..*.*Mapper.update(..))")
+    // @Before("execution(* com.viit..*.*Mapper.update(..))")
     public void doBeforeUpdate(JoinPoint point) {
         Object[] args = point.getArgs();
         // 判断参数存在

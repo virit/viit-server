@@ -1,7 +1,7 @@
 package com.viit.base.controller;
 
 import com.viit.base.entity.SysMenu;
-import com.viit.base.enums.SysMenuType;
+import com.viit.base.constants.SysMenuType;
 import com.viit.base.modelview.PageQuery;
 import com.viit.base.modelview.RestData;
 import com.viit.base.modelview.SimpleRestData;

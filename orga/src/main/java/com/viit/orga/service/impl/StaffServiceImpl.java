@@ -1,7 +1,7 @@
 package com.viit.orga.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.viit.base.enums.SysDictCode;
+import com.viit.base.constants.SysDictCode;
 import com.viit.orga.entity.Department;
 import com.viit.orga.entity.Staff;
 import com.viit.orga.mapper.StaffMapper;

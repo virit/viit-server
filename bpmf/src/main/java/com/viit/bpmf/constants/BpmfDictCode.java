@@ -1,6 +1,6 @@
 package com.viit.bpmf.constants;
 
-import com.viit.base.enums.IDictCode;
+import com.viit.base.constants.IDictCode;
 
 /**
  * @author virit

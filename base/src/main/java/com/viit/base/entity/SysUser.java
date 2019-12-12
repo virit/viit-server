@@ -1,7 +1,9 @@
 package com.viit.base.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.viit.base.constants.SysUserStatus;
 import com.viit.base.lang.entity.IdEntity;
 import com.viit.base.modelview.BaseProfile;
 import lombok.Data;
@@ -33,6 +35,7 @@ public class SysUser extends IdEntity implements UserDetails {
     @JsonView(BaseProfile.class)
     @NotBlank(groups = {SysUserGroups.NamePass.class})
     @Size(max = 16, groups = {SysUserGroups.NamePass.class})
+    @TableField(condition = SqlCondition.LIKE_RIGHT)
     protected String username;
     /**
      * 密码
@@ -56,6 +59,11 @@ public class SysUser extends IdEntity implements UserDetails {
     @TableField(exist = false)
     @JsonView(BaseProfile.class)
     private Collection<String> grantedAuthorities;
+
+    /**
+     * 状态
+     */
+    private Integer status;
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
@@ -89,7 +97,7 @@ public class SysUser extends IdEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return SysUserStatus.ENABLED == status;
     }
 
     @Override

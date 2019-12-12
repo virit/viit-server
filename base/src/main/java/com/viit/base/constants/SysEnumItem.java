@@ -1,4 +1,4 @@
-package com.viit.base.enums;
+package com.viit.base.constants;
 
 import lombok.Data;
 
