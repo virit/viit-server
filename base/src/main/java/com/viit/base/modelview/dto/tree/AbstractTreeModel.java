@@ -39,6 +39,10 @@ public abstract class AbstractTreeModel<T> extends ArrayList<ITreeNode> implemen
         return new String[]{};
     }
 
+    public String getChildrenFieldName() {
+        return "children";
+    }
+
     /**
      * 转换为节点
      * @param entity 实体
@@ -54,7 +58,7 @@ public abstract class AbstractTreeModel<T> extends ArrayList<ITreeNode> implemen
         }
         // 转换为树节点列表
         List<TreeNode> nodes = collection.stream().map(entity -> {
-            TreeNode node = new TreeNode(getExcludeFields());
+            TreeNode node = new TreeNode(getChildrenFieldName(), getExcludeFields());
             this.mapData(entity, node);
             return node;
         }).collect(Collectors.toList());

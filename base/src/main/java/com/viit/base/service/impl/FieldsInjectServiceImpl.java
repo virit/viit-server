@@ -1,4 +1,4 @@
-package com.viit.base.service;
+package com.viit.base.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -15,15 +15,15 @@ import java.util.List;
  * @param <M> Mapper
  * @param <T> 实体
  */
-public abstract class FieldsInjectServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> {
+public abstract class FieldsInjectServiceImpl<M extends BaseMapper<T>, T> extends BaseServiceImpl<M, T> {
 
     public abstract List<T> infoFieldsInject(List<T> list);
 
     @Override
     public <E extends IPage<T>> E page(E page, Wrapper<T> queryWrapper) {
-        IPage<T> resultPage = super.page(page, queryWrapper);
+        E resultPage = super.page(page, queryWrapper);
         resultPage.setRecords(infoFieldsInject(resultPage.getRecords()));
-        return super.page(page, queryWrapper);
+        return resultPage;
     }
 
     @Override

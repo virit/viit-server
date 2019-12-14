@@ -7,6 +7,7 @@ import com.viit.base.config.SystemConfig;
 import com.viit.base.entity.SysMenu;
 import com.viit.base.entity.SysRole;
 import com.viit.base.entity.SysRoleMenu;
+import com.viit.base.entity.SysUserRole;
 import com.viit.base.mapper.SysMenuMapper;
 import com.viit.base.service.SysMenuService;
 import com.viit.base.service.SysRoleMenuService;
@@ -57,9 +58,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
     }
 
+    private List<SysRoleMenu> listRoleMenuByRoleId(String roleId) {
+        SysRoleMenu query = new SysRoleMenu();
+        query.setRoleId(roleId);
+        QueryWrapper<SysRoleMenu> queryWrapper = new QueryWrapper<>(query);
+        return sysRoleMenuService.list(queryWrapper);
+    }
+
     @Override
     public List<SysMenu> listByRoleId(String id) {
-        return baseMapper.selectListByRoleId(id);
+        List<SysRoleMenu> sysRoleMenus = listRoleMenuByRoleId(id);
+        return listByIds(sysRoleMenus.stream().map(SysRoleMenu::getMenuId).collect(Collectors.toList()));
     }
 
     @Override

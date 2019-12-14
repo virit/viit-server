@@ -97,8 +97,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
         SysUser query = new SysUser();
         query.setUsername(username);
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>(query).eq("username", username);
-        SysUser user =  this.getOne(queryWrapper);
-        return user;
+        return this.getOne(queryWrapper);
     }
 
     @Override

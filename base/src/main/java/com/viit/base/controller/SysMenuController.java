@@ -136,6 +136,31 @@ public class SysMenuController {
         return new SimpleRestData<TreeModel>().data(model);
     }
 
+    @GetMapping("/router/antd")
+    public RestData<TreeModel> antdRouter() {
+        List<SysMenu> list = sysMenuService.listByUserId(ContextUtils.currentUser().getId())
+                .stream().filter(sysMenu -> SysMenuType.MENU == sysMenu.getType())
+                .collect(Collectors.toList());
+        // 创建树模型
+        TreeModel model = new AbstractTreeModel<SysMenu>(list) {
+
+            @Override
+            public void mapData(SysMenu menu, TreeNode treeNode) {
+                treeNode.setId(menu.getId());
+                treeNode.setParentId(menu.getParentId());
+                treeNode.set("path", menu.getUrl())
+                        .set("name", menu.getTitle())
+                        .set("icon", menu.getIcon());
+            }
+
+            @Override
+            public String[] getExcludeFields() {
+                return new String[]{"id", "parentId"};
+            }
+        };
+        return new SimpleRestData<TreeModel>().data(model);
+    }
+
     private static class SysMenuPageQuery extends PageQuery<SysMenu> {
     }
 }

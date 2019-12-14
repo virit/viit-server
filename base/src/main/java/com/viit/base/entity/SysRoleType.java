@@ -1,5 +1,7 @@
 package com.viit.base.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.viit.base.lang.entity.IdEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +24,7 @@ public class SysRoleType extends IdEntity {
      */
     @NotBlank
     @Size(max = 16)
+    @TableField(condition = SqlCondition.LIKE_RIGHT)
     private String typeName;
     /**
      * 类型描述

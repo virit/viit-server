@@ -75,7 +75,7 @@ public class SysRoleController {
     /**
      * 列表查询
      */
-    @GetMapping("")
+    @GetMapping
     @PreAuthorize("withAuthority('sys:role:query')")
     public RestData list(RolePageQuery pageQuery) {
         return FastCrudUtils.page(pageQuery, sysRoleService);

@@ -15,5 +15,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Transactional(readOnly = false, rollbackFor = Exception.class)
-public class SysRoleTypeServiceImpl extends ServiceImpl<SysRoleTypeMapper, SysRoleType> implements SysRoleTypeService {
+public class SysRoleTypeServiceImpl extends BaseServiceImpl<SysRoleTypeMapper, SysRoleType> implements SysRoleTypeService {
 }

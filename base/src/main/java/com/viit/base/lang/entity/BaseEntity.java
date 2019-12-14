@@ -21,9 +21,11 @@ import java.util.Map;
 public class BaseEntity extends Model<BaseEntity> implements Entity, IExtendable {
 
     @JsonView(BaseProfile.class)
+    @TableField(fill = FieldFill.INSERT)
     protected String createUserId;
 
     @JsonView(BaseProfile.class)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updateUserId;
 
     @JsonView(BaseProfile.class)

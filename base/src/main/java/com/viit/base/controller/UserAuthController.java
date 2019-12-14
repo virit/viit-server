@@ -42,7 +42,7 @@ public class UserAuthController {
      */
     @PostMapping("/user/login")
     public RestData userLogin(@RequestBody @Validated(SysUserGroups.NamePass.class) SysUser sysUser
-            , BindingResult bindingResult) {
+            , BindingResult bindingResult) throws Exception {
 
         ResultCode resultCode = null;
         try {
@@ -54,6 +54,8 @@ public class UserAuthController {
             resultCode = ResultCode.SUCCESS;
         } catch(UsernameNotFoundException | BadCredentialsException e) {
             resultCode = ResultCode.USERNAME_OR_PASSWORD_ERROR;
+        } catch (Exception e) {
+            throw e;
         }
         if (resultCode != ResultCode.SUCCESS) {
             return new SimpleRestData<>().resultCode(resultCode);

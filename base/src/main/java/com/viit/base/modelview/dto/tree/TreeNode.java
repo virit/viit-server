@@ -40,12 +40,15 @@ public class TreeNode extends HashMap<String, Object> implements ITreeNode, Sett
     @JsonIgnore
     private Map<String, Object> excludeMap = new HashMap<>(1);
 
+    private String childrenFieldName;
+
     public TreeNode() {
-        this(new String[] {});
+        this( "children", new String[] {});
     }
 
-    public TreeNode(String... excludeFields) {
+    public TreeNode(String childrenFieldName, String... excludeFields) {
         this.excludeFields = new ArrayList<>(Arrays.asList(excludeFields));
+        this.childrenFieldName = childrenFieldName;
     }
 
     public void setId(String id) {
@@ -61,7 +64,7 @@ public class TreeNode extends HashMap<String, Object> implements ITreeNode, Sett
     }
 
     public void setChildren(List<ITreeNode> children) {
-        this.put("children", children);
+        this.put(childrenFieldName, children);
     }
 
     @Override
@@ -81,7 +84,7 @@ public class TreeNode extends HashMap<String, Object> implements ITreeNode, Sett
 
     @Override
     public List<ITreeNode> getChildren() {
-        List<ITreeNode> children =  (List<ITreeNode>) this.get("children");
+        List<ITreeNode> children =  (List<ITreeNode>) this.get(childrenFieldName);
         if (children == null) {
             children = new ArrayList<>();
             this.setChildren(children);

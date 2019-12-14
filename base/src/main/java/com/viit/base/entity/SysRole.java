@@ -1,5 +1,6 @@
 package com.viit.base.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viit.base.lang.entity.IdEntity;
@@ -22,10 +23,12 @@ public class SysRole extends IdEntity implements GrantedAuthority {
     /**
      * 角色名称
      */
+    @TableField(condition = SqlCondition.LIKE_RIGHT)
     private String name;
     /**
      * 角色标识
      */
+    @TableField(condition = SqlCondition.LIKE_RIGHT)
     private String code;
     /**
      * 类型id

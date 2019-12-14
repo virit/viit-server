@@ -7,7 +7,7 @@ import com.viit.orga.entity.Staff;
 import com.viit.orga.mapper.StaffMapper;
 import com.viit.orga.service.DepartmentService;
 import com.viit.orga.service.StaffService;
-import com.viit.base.service.FieldsInjectServiceImpl;
+import com.viit.base.service.impl.FieldsInjectServiceImpl;
 import com.viit.base.service.SysDictService;
 import com.viit.base.utils.SysDictGather;
 import org.springframework.stereotype.Service;
