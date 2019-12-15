@@ -31,7 +31,7 @@ public class SysRoleTypeController {
      * 插入操作
      */
     @PostMapping("")
-    @PreAuthorize("withAuthority('sys:role:insert')")
+    @PreAuthorize("withAuthority('sys:role-type:insert')")
     public RestData save(@RequestBody @Validated SysRoleType sysDict, BindingResult bindingResult) {
 
         return FastCrudUtils.save(sysDict, sysDictService, bindingResult);
@@ -41,7 +41,7 @@ public class SysRoleTypeController {
      * 删除操作
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("withAuthority('sys:role:delete')")
+    @PreAuthorize("withAuthority('sys:role-type:delete')")
     public RestData delete(@PathVariable("id") String id) {
         return FastCrudUtils.delete(id, sysDictService);
     }
@@ -50,7 +50,7 @@ public class SysRoleTypeController {
      * 修改操作
      */
     @PutMapping("/{id}")
-    @PreAuthorize("withAuthority('sys:role:update')")
+    @PreAuthorize("withAuthority('sys:role-type:update')")
     public RestData update(@PathVariable("id") String id, @RequestBody @Validated SysRoleType sysDict, BindingResult bindingResult) {
         sysDict.setId(id);
         return FastCrudUtils.update(sysDict, sysDictService, bindingResult);
@@ -60,7 +60,7 @@ public class SysRoleTypeController {
      * 查询
      */
     @GetMapping("/{id}")
-    @PreAuthorize("withAuthority('sys:role:query')")
+    @PreAuthorize("withAuthority('sys:role-type:view')")
     public RestData get(@PathVariable("id") String id) {
         return new SimpleRestData<>().data(sysDictService.getById(id));
     }
@@ -69,7 +69,7 @@ public class SysRoleTypeController {
      * 列表数据
      */
     @GetMapping("")
-    @PreAuthorize("withAuthority('sys:role:query')")
+    @PreAuthorize("withAuthority('sys:role-type:view')")
     public RestData list(SysRoleTypePageQuery pageQuery) {
         return FastCrudUtils.page(pageQuery, sysDictService);
     }

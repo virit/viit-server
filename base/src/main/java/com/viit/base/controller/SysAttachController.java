@@ -15,6 +15,7 @@ import com.viit.base.service.SysAttachService;
 import com.viit.base.utils.ContextUtils;
 import com.viit.base.utils.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,11 +50,12 @@ public class SysAttachController {
      * 获取文件内容/下载文件
      */
     @GetMapping("/{id}")
-    public void content(@PathVariable("id") String id) throws FileNotFoundException {
+    public void content(@PathVariable("id") String id) throws IOException {
         InputStream in = null;
         String ext = null;
         if (StringUtils.equals(id, SysUser.DEFAULT_AVATAR)) {
-            in = new FileInputStream(ResourceUtils.getFile(SysUser.DEFAULT_AVATAR_PATH));
+            ClassPathResource resource = new ClassPathResource(SysUser.DEFAULT_AVATAR_PATH);
+            in = resource.getInputStream();
             ext = FileUtils.getFileExt(SysUser.DEFAULT_AVATAR_PATH);
         } else {
             // 获取文件流

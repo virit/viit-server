@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 public class SysUser extends IdEntity implements UserDetails {
 
     public static final String DEFAULT_AVATAR = "default-avatar";
-    public static final String DEFAULT_AVATAR_PATH = "classpath:images/default-avatar.png";
+    public static final String DEFAULT_AVATAR_PATH = "images/default-avatar.png";
 
     /**
      * 用户名
@@ -66,9 +67,28 @@ public class SysUser extends IdEntity implements UserDetails {
     private Integer status;
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
-        this.grantedAuthorities = authorities.stream()
-                .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+
+        // 进行权限分解
+        List<GrantedAuthority> actualAuthorities = new ArrayList<>();
+        authorities.forEach(it -> {
+            // 菜单可能配置多个权限
+            if (it instanceof SysMenu) {
+                String str = it.getAuthority();
+                if (str.contains("|")) {
+                    for (String item : str.split("[|]")) {
+                        actualAuthorities.add(new SysGrantedAuthority(item));
+                    }
+                } else {
+                    actualAuthorities.add(new SysGrantedAuthority(str));
+                }
+            } else {
+                actualAuthorities.add(new SysGrantedAuthority(it.getAuthority()));
+            }
+        });
+
+        this.authorities = actualAuthorities;
+        this.grantedAuthorities = actualAuthorities.stream().map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
     }
 
     public Collection<String> getGrantedAuthorities() {

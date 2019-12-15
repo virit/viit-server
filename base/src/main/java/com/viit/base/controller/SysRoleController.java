@@ -39,7 +39,7 @@ public class SysRoleController {
      * 新增
      */
     @PostMapping("")
-    @PreAuthorize("withAuthority('sys:role:save')")
+    @PreAuthorize("withAuthority('sys:role:add')")
     public RestData save(@Valid @RequestBody SysRole entity, BindingResult bindingResult) {
         return FastCrudUtils.save(entity, sysRoleService, bindingResult);
     }
@@ -67,7 +67,7 @@ public class SysRoleController {
      * 详情
      */
     @GetMapping("/{id}")
-    @PreAuthorize("withAuthority('sys:role:query')")
+    @PreAuthorize("withAuthority('sys:role:view')")
     public RestData get(@PathVariable("id") String id) {
         return new SimpleRestData<>().data(sysRoleService.getById(id));
     }
@@ -76,7 +76,7 @@ public class SysRoleController {
      * 列表查询
      */
     @GetMapping
-    @PreAuthorize("withAuthority('sys:role:query')")
+    @PreAuthorize("withAuthority('sys:role:view')")
     public RestData list(RolePageQuery pageQuery) {
         return FastCrudUtils.page(pageQuery, sysRoleService);
     }

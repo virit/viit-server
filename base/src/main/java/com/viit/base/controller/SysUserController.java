@@ -32,7 +32,7 @@ public class SysUserController {
      * 插入操作
      */
     @PostMapping("")
-    @PreAuthorize("withAuthority('sys:user:insert')")
+    @PreAuthorize("withAuthority('sys:user:add')")
     public RestData save(@RequestBody @Validated SysUser sysUser, BindingResult bindingResult) {
 
         SysUser userInDb = sysUserService.getOneByUsername(sysUser.getUsername());
@@ -84,7 +84,7 @@ public class SysUserController {
      * 查询
      */
     @GetMapping("/{id}")
-    @PreAuthorize("withAuthority('sys:user:query')")
+    @PreAuthorize("withAuthority('sys:user:view')")
     public RestData get(@PathVariable("id") String id) {
         return new SimpleRestData<>().data(sysUserService.getById(id));
     }
@@ -93,7 +93,7 @@ public class SysUserController {
      * 列表数据
      */
     @GetMapping("")
-    @PreAuthorize("withAuthority('sys:user:query')")
+    @PreAuthorize("withAuthority('sys:user:view')")
     public RestData list(SysUserController.SysUserPageQuery pageQuery) {
         return FastCrudUtils.page(pageQuery, sysUserService);
     }
