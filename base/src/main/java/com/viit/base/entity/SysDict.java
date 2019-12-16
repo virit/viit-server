@@ -1,5 +1,7 @@
 package com.viit.base.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.viit.base.lang.entity.IdEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,10 +19,12 @@ public class SysDict extends IdEntity {
     /**
      * 字典表名称
      */
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
     /**
      * 字典标识
      */
+    @TableField(condition = SqlCondition.LIKE)
     private String code;
     /**
      * 字典表描述

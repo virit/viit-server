@@ -53,6 +53,10 @@ public class SysMenu extends IdEntity implements GrantedAuthority {
      */
     @Size(max = 16)
     private String icon;
+    /**
+     * 是否隐藏
+     */
+    private Integer hide;
 
     @Override
     public String getAuthority() {

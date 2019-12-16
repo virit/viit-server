@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: clouddev
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -80,10 +80,15 @@ spring:
   attachServer: /home/attachs
 ---
 spring:
-  profiles: local
+  profiles: clouddev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/pendulum?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
-    username: root
-    password: 123456
+    url: jdbc:mysql://47.101.155.230:3306/viit_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: viit_test
+    password: 159874
+  redis:
+    url: redis://47.101.155.230:6379
+    database: 1
   attachServer: /home/attachs
+server:
+  port: 8088

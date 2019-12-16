@@ -151,6 +151,7 @@ public class SysMenuController {
                 treeNode.set("path", menu.getUrl())
                         .set("name", menu.getTitle())
                         .set("icon", menu.getIcon());
+                treeNode.set("hideInMenu", menu.getHide() == 1);
             }
 
             @Override
