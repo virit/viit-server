@@ -44,11 +44,13 @@ public class TreeNode extends HashMap<String, Object> implements ITreeNode, Sett
 
     public TreeNode() {
         this( "children", new String[] {});
+        this.set("children", new ArrayList<ITreeNode>());
     }
 
     public TreeNode(String childrenFieldName, String... excludeFields) {
         this.excludeFields = new ArrayList<>(Arrays.asList(excludeFields));
         this.childrenFieldName = childrenFieldName;
+        this.set("children", new ArrayList<ITreeNode>());
     }
 
     public void setId(String id) {

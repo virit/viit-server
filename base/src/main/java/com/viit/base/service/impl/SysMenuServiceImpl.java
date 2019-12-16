@@ -7,7 +7,6 @@ import com.viit.base.config.SystemConfig;
 import com.viit.base.entity.SysMenu;
 import com.viit.base.entity.SysRole;
 import com.viit.base.entity.SysRoleMenu;
-import com.viit.base.entity.SysUserRole;
 import com.viit.base.mapper.SysMenuMapper;
 import com.viit.base.service.SysMenuService;
 import com.viit.base.service.SysRoleMenuService;
@@ -49,11 +48,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public List<SysMenu> listByParentId(String id) {
 
         if (StringUtils.isBlank(id)) {
-            return this.list();
+            QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>();
+            queryWrapper.orderByAsc("order_num");
+            return this.list(queryWrapper);
         } else {
             SysMenu query = new SysMenu();
             query.setParentId(id);
             QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>(query);
+            queryWrapper.orderByAsc("order_num");
             return this.list(queryWrapper);
         }
     }
@@ -130,6 +132,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
         menuCollection.addAll(parents);
         return menuCollection;
+    }
+
+    @Override
+    public void saveOrder(List<String> ids) {
+        int index = 0;
+        for (String id : ids) {
+            SysMenu menu = getById(id);
+            menu.setOrderNum(index);
+            updateById(menu);
+            index ++;
+        }
     }
 
     private Map<String, SysMenu> convertMenuMap(List<SysMenu> menus) {

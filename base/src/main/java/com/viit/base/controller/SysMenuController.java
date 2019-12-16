@@ -1,5 +1,6 @@
 package com.viit.base.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.viit.base.entity.SysMenu;
 import com.viit.base.constants.SysMenuType;
 import com.viit.base.modelview.PageQuery;
@@ -11,14 +12,13 @@ import com.viit.base.modelview.dto.tree.TreeNode;
 import com.viit.base.service.SysMenuService;
 import com.viit.base.utils.ContextUtils;
 import com.viit.base.utils.FastCrudUtils;
+import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -100,6 +100,11 @@ public class SysMenuController {
                 treeNode.setParentId(entity.getParentId());
                 treeNode.setLabel(entity.getTitle());
             }
+
+            @Override
+            public String[] getExcludeFields() {
+                return new String[] {"parentId"};
+            }
         };
         return new SimpleRestData<TreeModel>().data(model);
     }
@@ -140,6 +145,7 @@ public class SysMenuController {
     public RestData<TreeModel> antdRouter() {
         List<SysMenu> list = sysMenuService.listByUserId(ContextUtils.currentUser().getId())
                 .stream().filter(sysMenu -> SysMenuType.MENU == sysMenu.getType())
+                .sorted((a, b) -> a.getOrderNum() - b.getOrderNum())
                 .collect(Collectors.toList());
         // 创建树模型
         TreeModel model = new AbstractTreeModel<SysMenu>(list) {
@@ -160,6 +166,32 @@ public class SysMenuController {
             }
         };
         return new SimpleRestData<TreeModel>().data(model);
+    }
+
+    @Data
+    private static class TreeNodeObject {
+        private String id;
+        private List<TreeNodeObject> children;
+        private String label;
+
+    }
+
+    private void loopGet(List<TreeNodeObject> treeNodes, List<String> ids) {
+        treeNodes.forEach((node) -> {
+            ids.add(node.id);
+            if (node.children != null) {
+                loopGet(node.children, ids);
+            }
+        });
+    }
+
+    @PutMapping("/tree/order")
+    public RestData saveOrder(@RequestBody List<TreeNodeObject> nodes) {
+
+        List<String> ids = new ArrayList<>();
+        loopGet(nodes, ids);
+        sysMenuService.saveOrder(ids);
+        return SimpleRestData.SUCCESS;
     }
 
     private static class SysMenuPageQuery extends PageQuery<SysMenu> {

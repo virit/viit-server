@@ -43,4 +43,10 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return 用户的菜单列表
      */
     List<SysMenu> listByUserId(String userId);
+
+    /**
+     * 保存排序
+     * @param ids id列表
+     */
+    void saveOrder(List<String> ids);
 }

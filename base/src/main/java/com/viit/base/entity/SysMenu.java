@@ -58,6 +58,11 @@ public class SysMenu extends IdEntity implements GrantedAuthority {
      */
     private Integer hide;
 
+    /**
+     * 排序号
+     */
+    private Integer orderNum;
+
     @Override
     public String getAuthority() {
         return authority;
