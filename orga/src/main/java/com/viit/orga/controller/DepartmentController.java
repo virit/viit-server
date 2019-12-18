@@ -1,19 +1,23 @@
 package com.viit.orga.controller;
 
+import com.viit.base.controller.SysMenuController;
 import com.viit.base.modelview.PageQuery;
 import com.viit.base.modelview.RestData;
 import com.viit.base.modelview.SimpleRestData;
 import com.viit.base.modelview.dto.tree.AbstractTreeModel;
 import com.viit.base.modelview.dto.tree.TreeModel;
 import com.viit.base.modelview.dto.tree.TreeNode;
+import com.viit.base.utils.objects.OrderObject;
 import com.viit.orga.entity.Department;
 import com.viit.orga.service.DepartmentService;
 import com.viit.base.utils.FastCrudUtils;
+import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,4 +106,30 @@ public class DepartmentController {
     }
 
     private static class DepartmentPageQuery extends PageQuery<Department> {}
+
+    @Data
+    private static class TreeNodeObject {
+        private String id;
+        private List<TreeNodeObject> children;
+        private String label;
+
+    }
+
+    private void loopGet(List<TreeNodeObject> treeNodes, List<OrderObject> items, String parentId) {
+        treeNodes.forEach((node) -> {
+            items.add(new OrderObject(node.getId(), parentId));
+            if (node.children != null) {
+                loopGet(node.children, items, node.getId());
+            }
+        });
+    }
+
+    @PutMapping("/tree/order")
+    public RestData saveOrder(@RequestBody List<TreeNodeObject> nodes) {
+
+        List<OrderObject> items = new ArrayList<>();
+        loopGet(nodes, items, "");
+        departmentService.saveOrder(items);
+        return SimpleRestData.SUCCESS;
+    }
 }

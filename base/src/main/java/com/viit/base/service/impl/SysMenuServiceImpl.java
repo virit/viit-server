@@ -11,6 +11,7 @@ import com.viit.base.mapper.SysMenuMapper;
 import com.viit.base.service.SysMenuService;
 import com.viit.base.service.SysRoleMenuService;
 import com.viit.base.service.SysRoleService;
+import com.viit.base.utils.objects.OrderObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -135,10 +136,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
-    public void saveOrder(List<String> ids) {
+    public void saveOrder(List<OrderObject> items) {
         int index = 0;
-        for (String id : ids) {
-            SysMenu menu = getById(id);
+        for (OrderObject item : items) {
+            SysMenu menu = getById(item.getId());
+            menu.setParentId(item.getParent());
             menu.setOrderNum(index);
             updateById(menu);
             index ++;

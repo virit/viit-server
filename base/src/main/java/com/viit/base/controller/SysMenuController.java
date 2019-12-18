@@ -12,6 +12,7 @@ import com.viit.base.modelview.dto.tree.TreeNode;
 import com.viit.base.service.SysMenuService;
 import com.viit.base.utils.ContextUtils;
 import com.viit.base.utils.FastCrudUtils;
+import com.viit.base.utils.objects.OrderObject;
 import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -71,6 +72,9 @@ public class SysMenuController {
     @GetMapping("/{id}")
     public RestData get(@PathVariable("id") String id) {
         return new SimpleRestData<>().data(sysMenuService.getById(id));
+    }
+
+    private static class SysMenuPageQuery extends PageQuery<SysMenu> {
     }
 
     /**
@@ -176,11 +180,11 @@ public class SysMenuController {
 
     }
 
-    private void loopGet(List<TreeNodeObject> treeNodes, List<String> ids) {
+    private void loopGet(List<TreeNodeObject> treeNodes, List<OrderObject> items, String parentId) {
         treeNodes.forEach((node) -> {
-            ids.add(node.id);
+            items.add(new OrderObject(node.getId(), parentId));
             if (node.children != null) {
-                loopGet(node.children, ids);
+                loopGet(node.children, items, node.getId());
             }
         });
     }
@@ -188,12 +192,9 @@ public class SysMenuController {
     @PutMapping("/tree/order")
     public RestData saveOrder(@RequestBody List<TreeNodeObject> nodes) {
 
-        List<String> ids = new ArrayList<>();
-        loopGet(nodes, ids);
-        sysMenuService.saveOrder(ids);
+        List<OrderObject> items = new ArrayList<>();
+        loopGet(nodes, items, "");
+        sysMenuService.saveOrder(items);
         return SimpleRestData.SUCCESS;
-    }
-
-    private static class SysMenuPageQuery extends PageQuery<SysMenu> {
     }
 }

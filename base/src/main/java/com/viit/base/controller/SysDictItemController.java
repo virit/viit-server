@@ -28,18 +28,15 @@ public class SysDictItemController {
 
     private final SysDictItemService sysDictItemService;
 
-    private final SysDictService sysDictService;
-
-    public SysDictItemController(SysDictItemService sysDictItemService, SysDictService sysDictService) {
+    public SysDictItemController(SysDictItemService sysDictItemService) {
         this.sysDictItemService = sysDictItemService;
-        this.sysDictService = sysDictService;
     }
 
     @GetMapping("/code/{code}")
-    @PreAuthorize("withAuthority('sys:dict:query')")
     public RestData listByCode(@PathVariable("code") String code) {
-        if (code.contains(",")) {
-            String[] codes = code.split(",");
+        final String splitter = ",";
+        if (code.contains(splitter)) {
+            String[] codes = code.split(splitter);
             Map<String, List<SysDictItem>> map = new HashMap<>(1);
             for (String codeItem : codes) {
                 map.put(codeItem, sysDictItemService.listItemsByCode(codeItem));

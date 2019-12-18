@@ -2,6 +2,7 @@ package com.viit.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.viit.base.entity.SysMenu;
+import com.viit.base.utils.objects.OrderObject;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public interface SysMenuService extends IService<SysMenu> {
 
     /**
      * 保存排序
-     * @param ids id列表
+     * @param items 排序列表
      */
-    void saveOrder(List<String> ids);
+    void saveOrder(List<OrderObject> items);
 }
