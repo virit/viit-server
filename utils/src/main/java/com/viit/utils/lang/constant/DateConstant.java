@@ -3,7 +3,7 @@ package com.viit.utils.lang.constant;
 /**
  * 日期格式枚举
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public enum DateConstant {

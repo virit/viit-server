@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * 系统用户实体类
  *
- * @author chentao
+ * @author virit
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

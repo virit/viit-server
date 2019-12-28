@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 系统用户service
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public interface SysUserService extends IService<SysUser> {

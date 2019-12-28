@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * 树型结构
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-32
  */
 public interface TreeModel<T> extends Collection<ITreeNode> {

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 用户权限controller
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @RestController

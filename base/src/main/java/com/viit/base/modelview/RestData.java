@@ -3,7 +3,7 @@ package com.viit.base.modelview;
 /**
  * rest data
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public interface RestData<T> {

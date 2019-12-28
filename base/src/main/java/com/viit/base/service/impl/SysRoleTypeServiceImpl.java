@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 系统角色类型service实现类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Component

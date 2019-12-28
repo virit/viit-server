@@ -6,7 +6,7 @@ import com.viit.base.entity.SysRoleType;
 /**
  * 系统角色类型service
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public interface SysRoleTypeService extends IService<SysRoleType> {

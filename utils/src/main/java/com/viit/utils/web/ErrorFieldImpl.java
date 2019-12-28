@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 错误字段实现类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Data

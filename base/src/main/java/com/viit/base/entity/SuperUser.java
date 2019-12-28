@@ -1,5 +1,7 @@
 package com.viit.base.entity;
 
+import com.viit.base.config.SystemConfig;
+import com.viit.base.utils.ContextUtils;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
@@ -7,7 +9,7 @@ import java.util.*;
 /**
  * 超级用户
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-31
  */
 public class SuperUser extends SysUser {
@@ -57,6 +59,6 @@ public class SuperUser extends SysUser {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return ContextUtils.getBean(SystemConfig.class).superInfo().enabled();
     }
 }

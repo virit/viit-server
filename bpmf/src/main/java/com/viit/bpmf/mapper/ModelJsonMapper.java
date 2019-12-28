@@ -1,18 +1,17 @@
-package com.viit.base.mapper;
+package com.viit.bpmf.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.viit.base.entity.SysRoleType;
+import com.viit.bpmf.entity.ModelJson;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * 系统角色类型mapper
+ * json模型mapper
  *
  * @author virit
- * @version 2019-10-29
+ * @version 2019-12-22
  */
 @Mapper
 @Repository
-public interface SysRoleTypeMapper extends BaseMapper<SysRoleType> {
-
+public interface ModelJsonMapper extends BaseMapper<ModelJson> {
 }

@@ -6,7 +6,7 @@ import com.viit.base.entity.SysPermission;
 /**
  * 系统权限service
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public interface SysPermissionService extends IService<SysPermission> {

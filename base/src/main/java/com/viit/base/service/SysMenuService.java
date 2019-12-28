@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 系统菜单service
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public interface SysMenuService extends IService<SysMenu> {

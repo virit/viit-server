@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * spring security配置类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Configuration
@@ -34,10 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PERMIT_ALL_MATCHERS = {
             "/user/login",
             "/user/token",
-            "/swagger-ui.html",
-            "/webjars/springfox-swagger-ui/**",
-            "/swagger-resources/**",
-            "/v2/**",
             "/websocket/**"
     };
 
@@ -50,20 +46,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.objectMapper = objectMapper;
     }
 
-    public @Bean AccessDeniedHandler accessDeniedHandler() {
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
         return (request, response, e) -> {
             response.setContentType(JSON_TYPE);
             RestData restData = new SimpleRestData<>().resultCode(ResultCode.NO_PERMISSION);
-            response.setStatus(HttpServletResponse.SC_OK);
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.getWriter().write(objectMapper.writeValueAsString(restData));
         };
     }
 
-    public @Bean AuthenticationEntryPoint authenticationEntryPoint() {
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
         return (request, response, e) -> {
             response.setContentType(JSON_TYPE);
             RestData restData = new SimpleRestData<>().resultCode(ResultCode.UNAUTHORIZED);
-            response.setStatus(HttpServletResponse.SC_OK);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write(objectMapper.writeValueAsString(restData));
         };
     }
@@ -72,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilter(new ConcurrentSessionFilter(sessionRegistry));
         http.csrf().disable();
-        // http.csrf().ignoringAntMatchers(PERMIT_ALL_MATCHERS[0]);
         http.authorizeRequests()
                 .antMatchers(PERMIT_ALL_MATCHERS).permitAll()
                 .antMatchers("/*").hasRole(SuperUser.SUPER)

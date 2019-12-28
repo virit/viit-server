@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 /**
  * 系统菜单实体
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Data

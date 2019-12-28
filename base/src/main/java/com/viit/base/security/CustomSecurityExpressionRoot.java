@@ -1,5 +1,6 @@
 package com.viit.base.security;
 
+import com.viit.base.config.SuperInfo;
 import com.viit.base.config.SystemConfig;
 import com.viit.base.utils.ContextUtils;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
@@ -17,31 +18,34 @@ public class CustomSecurityExpressionRoot extends SecurityExpressionRoot impleme
     private Object filterObject;
     private Object returnObject;
 
-    private SystemConfig systemConfig;
+    private SuperInfo superInfo;
 
     public CustomSecurityExpressionRoot(Authentication authentication, SystemConfig systemConfig) {
         super(authentication);
-        this.systemConfig = systemConfig;
+        this.superInfo = systemConfig.superInfo();
     }
 
     /**
      * 基于hasAuthority
+     *
      * @param authority 权限
      * @return boolean
      */
     public final boolean withAuthority(String authority) {
-        if (systemConfig.getSuperUsername().equals(ContextUtils.currentUser().getId())) {
+        if (superInfo.username().equals(ContextUtils.currentUser().getId())) {
             return true;
         }
         return hasAuthority(authority);
     }
+
     /**
      * 基于hasAuthority
+     *
      * @param authorities 权限
      * @return boolean
      */
     public final boolean withAnyAuthority(String... authorities) {
-        if (systemConfig.getSuperUsername().equals(ContextUtils.currentUser().getId())) {
+        if (superInfo.username().equals(ContextUtils.currentUser().getId())) {
             return true;
         }
         return hasAnyAuthority(authorities);

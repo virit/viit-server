@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 表单校验工具类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public class ValidationUtils {

@@ -11,7 +11,7 @@ spring:
     url: redis://127.0.0.1:6379
     database: 1
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/viit_test?useUnicode=true&characterEncoding=utf-8&&serverTimezone=GMT%2B8
     username: viit_test
     password: 9999999

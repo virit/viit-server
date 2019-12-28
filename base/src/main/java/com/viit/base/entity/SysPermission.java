@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 /**
  * 系统权限
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Data

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 /**
  * id实体
  *
- * @author chentao
+ * @author virit
  * @version 2019-11-19
  */
 @Data

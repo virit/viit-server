@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 用户角色关联实体
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Data

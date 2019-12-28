@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * 实体类接口
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public interface Entity extends Serializable, Cloneable {

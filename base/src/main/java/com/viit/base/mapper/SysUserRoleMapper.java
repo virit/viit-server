@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 用户角色mapper
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Mapper

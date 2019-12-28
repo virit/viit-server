@@ -1,9 +1,9 @@
 package com.viit.base.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.viit.base.attach.AttachManager;
 import com.viit.base.attach.LocalAttachManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,25 +11,27 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import javax.sql.DataSource;
-
 /**
  * 配置类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Configuration
-@PropertySource(value = "classpath:system.properties", encoding = "UTF-8")
+@PropertySource(value = "classpath:application.yml", encoding = "UTF-8")
 public class BaseConfiguration {
 
-    /**
-     * 附件服务配置
-     */
-    @Value("${attachServer}")
-    private String attachServer;
+    private final SystemConfig systemConfig;
 
-    public @Bean BCryptPasswordEncoder passwordEncoder() {
+    public BaseConfiguration(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
+    }
+
+    /**
+     * 密码加密组件
+     */
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -38,28 +40,30 @@ public class BaseConfiguration {
      */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
-        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
-        // paginationInterceptor.setOverflow(false);
-        // 设置最大单页限制数量，默认 500 条，-1 不受限制
-        // paginationInterceptor.setLimit(500);
         return new PaginationInterceptor();
     }
 
     /**
      * 配置附件管理器
      */
-    public @Bean AttachManager attachManager() {
+    @Bean
+    public AttachManager attachManager() {
 
         final String ftpPrefix = "ftp://";
         // ftp服务
-        if (attachServer.startsWith(ftpPrefix)) {
+        if (systemConfig.attachServer().startsWith(ftpPrefix)) {
             return null;
         } else {
-            return new LocalAttachManager(attachServer);
+            // 本地存储
+            return new LocalAttachManager(systemConfig.attachServer());
         }
     }
 
-    public @Bean ServerEndpointExporter serverEndpointExporter () {
+    /**
+     * websocket端点
+     */
+    @Bean
+    public ServerEndpointExporter serverEndpointExporter () {
         return new ServerEndpointExporter();
     }
 }

@@ -1,6 +1,7 @@
 package com.viit.base.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.viit.base.config.SuperInfo;
 import com.viit.base.config.SystemConfig;
 import com.viit.base.entity.SysMenu;
 import com.viit.base.entity.SysRole;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * 系统用户service实现类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Service
@@ -41,7 +42,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 
     private final SysMenuService sysMenuService;
 
-    private final SystemConfig systemConfig;
+    private final SuperInfo superInfo;
 
     public SysUserServiceImpl(PasswordEncoder passwordEncoder, SysUserRoleService sysUserRoleService,
                               SysRoleService sysRoleService, SysMenuService sysMenuService, SystemConfig systemConfig) {
@@ -49,7 +50,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
         this.sysUserRoleService = sysUserRoleService;
         this.sysRoleService = sysRoleService;
         this.sysMenuService = sysMenuService;
-        this.systemConfig = systemConfig;
+        this.superInfo = systemConfig.superInfo();
     }
 
     private void handleSave(SysUser sysUser) {
@@ -103,7 +104,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
     @Override
     public SysUser getById(Serializable id) {
         SysUser user = super.getById(id);
-        if (!(systemConfig.getSuperUsername().equals(id))) {
+        if (!(superInfo.username().equals(id))) {
             user.setRoleIdList(sysUserRoleService.listRoleIdByUserId(user.getId()));
         }
         return user;

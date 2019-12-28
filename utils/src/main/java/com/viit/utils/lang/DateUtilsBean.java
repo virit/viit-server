@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * 日期工具类Bean
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 class DateUtilsBean implements IDateUtilsBean {

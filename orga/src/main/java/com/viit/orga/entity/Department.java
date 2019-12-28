@@ -27,9 +27,13 @@ public class Department extends IdEntity {
     /**
      * 机构类型
      */
-    private Integer type;
+    private String type;
     /**
      * 机构编码
      */
     private String code;
+    /**
+     * 排序号
+     */
+    private Integer orderNum;
 }

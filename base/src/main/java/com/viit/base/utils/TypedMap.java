@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * typed map
  *
- * @author chentao
+ * @author virit
  * @version 2019-11-8
  */
 public class TypedMap extends HashMap<String, Object> {

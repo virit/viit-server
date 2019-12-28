@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * 系统角色service实现类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Service

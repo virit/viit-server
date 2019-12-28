@@ -3,7 +3,7 @@ package com.viit.utils.web;
 /**
  * 错误字段
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public interface ErrorField {

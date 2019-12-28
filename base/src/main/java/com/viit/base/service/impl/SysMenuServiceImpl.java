@@ -3,6 +3,7 @@ package com.viit.base.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.Preconditions;
+import com.viit.base.config.SuperInfo;
 import com.viit.base.config.SystemConfig;
 import com.viit.base.entity.SysMenu;
 import com.viit.base.entity.SysRole;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * 系统菜单service实现类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Service
@@ -37,12 +38,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     private final SysRoleService sysRoleService;
 
-    private final SystemConfig systemConfig;
+    private final SuperInfo superInfo;
 
-    public SysMenuServiceImpl(SysRoleMenuService sysRoleMenuService, SysRoleService sysRoleService, SystemConfig systemConfig) {
+    public SysMenuServiceImpl(SysRoleMenuService sysRoleMenuService, SysRoleService sysRoleService,
+                              SystemConfig systemConfig) {
+
         this.sysRoleMenuService = sysRoleMenuService;
         this.sysRoleService = sysRoleService;
-        this.systemConfig = systemConfig;
+        this.superInfo = systemConfig.superInfo();
     }
 
     @Override
@@ -98,7 +101,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     @Override
     public List<SysMenu> listByUserId(String userId) {
-        if (systemConfig.getSuperUsername().equals(userId)) {
+        if (superInfo.username().equals(userId)) {
             return this.listByParentId(null);
         }
         // 获取用户的角色列表
@@ -143,7 +146,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             menu.setParentId(item.getParent());
             menu.setOrderNum(index);
             updateById(menu);
-            index ++;
+            index++;
         }
     }
 

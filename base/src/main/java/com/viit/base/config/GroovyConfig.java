@@ -9,6 +9,12 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * groovy配置
+ *
+ * @author virit
+ * @version 2019-12-28
+ */
 @Configuration
 public class GroovyConfig implements ApplicationContextAware {
 

@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.Preconditions;
 import com.viit.base.constants.SysDictCode;
+import com.viit.base.entity.SysMenu;
+import com.viit.base.utils.objects.OrderObject;
 import com.viit.orga.entity.Department;
 import com.viit.orga.mapper.DepartmentMapper;
 import com.viit.orga.service.DepartmentService;
@@ -89,5 +91,17 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
                 .addInfoField("typeText", deptGather.getText(item.getType()))
         );
         return list;
+    }
+
+    @Override
+    public void saveOrder(List<OrderObject> items) {
+        int index = 0;
+        for (OrderObject item : items) {
+            Department department = getById(item.getId());
+            department.setParentId(item.getParent());
+            department.setOrderNum(index);
+            updateById(department);
+            index ++;
+        }
     }
 }

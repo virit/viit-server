@@ -3,7 +3,7 @@ package com.viit.base.modelview;
 /**
  * 业务状态码
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public enum ResultCode {
@@ -38,11 +38,11 @@ public enum ResultCode {
     /**
      * 用户未认证
      */
-    UNAUTHORIZED(4010, "用户未认证"),
+    UNAUTHORIZED(401, "用户未认证"),
     /**
      * 用户无权限
      */
-    NO_PERMISSION(4030, "用户无权限");
+    NO_PERMISSION(403, "用户无权限");
 
     private int code;
     private String msg;

@@ -8,7 +8,7 @@ import lombok.Data;
  * 分页查询封装
  *
  * @param <T> 实体类型
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Data

@@ -9,7 +9,7 @@ import com.viit.base.modelview.BaseProfile;
 /**
  * id实体
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public class IdEntity extends BaseEntity {

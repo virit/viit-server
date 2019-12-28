@@ -7,7 +7,7 @@ import org.springframework.validation.Errors;
 /**
  * 表单错误返回数据
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public class FormErrorData extends SimpleRestData<ErrorFields> {

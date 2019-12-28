@@ -1,4 +1,4 @@
-package com.viit.base.config.mybatisplus;
+package com.viit.base.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.viit.base.utils.ContextUtils;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * 默认填充类
+ * 默认的填充类
  *
  * @author virit
  * @version 2019-12-12

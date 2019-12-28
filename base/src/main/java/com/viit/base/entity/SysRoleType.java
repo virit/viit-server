@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 /**
  * 系统角色类型
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @Data

@@ -1,7 +1,8 @@
 package com.viit.base.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import com.viit.base.config.impl.SuperInfoImpl;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,35 +11,26 @@ import org.springframework.stereotype.Component;
  * @author virit
  * @version 2019-10-31
  */
+@Data
 @Component
-@PropertySource("classpath:system.properties")
+@ConfigurationProperties(prefix = "system")
 public class SystemConfig {
 
-    /**
-     * 超级用户用户名
-     */
-    @Value("${super.username}")
-    private String superUsername;
-    /**
-     * 超级用户密码
-     */
-    @Value("${super.password}")
-    private String superPassword;
-    /**
-     * 文件存储地址
-     */
-    @Value("${system.file.path}")
-    private String filePath;
+    private SuperInfoImpl superInfo;
 
-    public String getSuperUsername() {
-        return this.superUsername;
+    private String attachServer = "";
+
+    /**
+     * 获取超级用户信息
+     */
+    public SuperInfo superInfo () {
+        return this.superInfo;
     }
 
-    public String getSuperPassword() {
-        return this.superPassword;
-    }
-
-    public String getFilePath() {
-        return this.filePath;
+    /**
+     * 获取附件存储服务
+     */
+    public String attachServer() {
+        return this.attachServer;
     }
 }

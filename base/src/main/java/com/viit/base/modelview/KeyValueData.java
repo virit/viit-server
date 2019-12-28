@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 键值对data
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @JsonView(BaseProfile.class)

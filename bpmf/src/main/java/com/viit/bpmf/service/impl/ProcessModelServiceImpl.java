@@ -8,6 +8,8 @@ import com.viit.base.service.SysDictService;
 import com.viit.base.utils.SysDictGather;
 import com.viit.bpmf.constants.BpmfDictCode;
 import com.viit.bpmf.entity.ModelEntityWrapper;
+import com.viit.bpmf.entity.ModelJson;
+import com.viit.bpmf.service.ModelJsonService;
 import com.viit.bpmf.service.ProcessModelService;
 import com.viit.utils.bean.BeanUtils;
 import org.activiti.engine.RepositoryService;
@@ -16,6 +18,7 @@ import org.activiti.engine.repository.ModelQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,11 +41,15 @@ public class ProcessModelServiceImpl implements ProcessModelService {
 
     private final SysDictService sysDictService;
 
+    private final ModelJsonService modelJsonService;
+
     private Logger logger = LoggerFactory.getLogger(ProcessModelServiceImpl.class);
 
-    public ProcessModelServiceImpl(RepositoryService repositoryService, SysDictService sysDictService) {
+    public ProcessModelServiceImpl(RepositoryService repositoryService, SysDictService sysDictService,
+                                   ModelJsonService modelJsonService) {
         this.repositoryService = repositoryService;
         this.sysDictService = sysDictService;
+        this.modelJsonService = modelJsonService;
     }
 
     private ModelQuery createModelQuery(QueryWrapper<ModelEntityWrapper> queryWrapper) {
@@ -126,6 +133,37 @@ public class ProcessModelServiceImpl implements ProcessModelService {
     public void addModelSourceAndExtra(String id, String source, String extra) {
         repositoryService.addModelEditorSource(id, source.getBytes());
         repositoryService.addModelEditorSourceExtra(id, extra.getBytes());
+    }
+
+    @Override
+    public void addModelSource(String id, String source, String jsonData) {
+        repositoryService.addModelEditorSource(id, source.getBytes());
+        addModelJsonData(id, jsonData);
+    }
+
+    @Override
+    public ModelJson getModelJson(String modelId) {
+        ModelJson query = new ModelJson();
+        query.setModelId(modelId);
+        QueryWrapper<ModelJson> queryWrapper = new QueryWrapper<>(query);
+        return modelJsonService.getOne(queryWrapper);
+    }
+
+    @Override
+    public void addModelJsonData(String modelId, String jsonData) {
+        ModelJson query = new ModelJson();
+        query.setModelId(modelId);
+        QueryWrapper<ModelJson> queryWrapper = new QueryWrapper<>(query);
+        ModelJson modelJson = modelJsonService.getOne(queryWrapper);
+        if (modelJson == null) {
+            modelJson = new ModelJson();
+            modelJson.setModelId(modelId);
+            modelJson.setJsonData(jsonData);
+            modelJsonService.save(modelJson);
+        } else {
+            modelJson.setJsonData(jsonData);
+            modelJsonService.updateById(modelJson);
+        }
     }
 
     private List<ModelEntityWrapper> infoFieldsInject(List<ModelEntityWrapper> list) {

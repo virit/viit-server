@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * 实体基类
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public class BaseEntity extends Model<BaseEntity> implements Entity, IExtendable {

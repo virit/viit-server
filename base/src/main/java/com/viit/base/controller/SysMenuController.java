@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 /**
  * 系统菜单接口
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-31
  */
 @RestController

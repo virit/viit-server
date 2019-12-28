@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 快速增删改查工具
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public class FastCrudUtils {

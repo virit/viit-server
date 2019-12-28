@@ -1,6 +1,7 @@
 package com.viit.orga.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.viit.base.utils.objects.OrderObject;
 import com.viit.orga.entity.Department;
 
 import java.util.List;
@@ -19,4 +20,10 @@ public interface DepartmentService extends IService<Department> {
      * @return 列表
      */
     List<Department> listByParentId(String id);
+
+    /**
+     * 保存排序
+     * @param items 排序列表
+     */
+    void saveOrder(List<OrderObject> items);
 }

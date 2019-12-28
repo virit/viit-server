@@ -3,7 +3,7 @@ package com.viit.base.modelview;
 /**
  * 字符串常量
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 public final class StringConstant {

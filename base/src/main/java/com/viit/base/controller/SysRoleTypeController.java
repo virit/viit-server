@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 系统角色类型controller
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-29
  */
 @RestController

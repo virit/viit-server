@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * 日期工具类Bean接口
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public interface IDateUtilsBean {

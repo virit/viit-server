@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  * rest data实现类
  *
  * @param <T> data类型
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 @Data

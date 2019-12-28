@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 系统角色service
  *
- * @author chentao
+ * @author virit
  * @version 2019-10-28
  */
 public interface SysRoleService extends IService<SysRole> {
