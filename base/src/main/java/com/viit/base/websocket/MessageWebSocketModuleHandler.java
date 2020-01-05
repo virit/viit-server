@@ -1,16 +1,14 @@
 package com.viit.base.websocket;
 
-import com.viit.base.annotation.websocket.JsonData;
-import com.viit.base.annotation.websocket.WSModulePath;
-import com.viit.base.entity.SysUser;
+import com.viit.base.annotation.websocket.WSPath;
 import org.springframework.stereotype.Service;
 
 @Service
-@WSModulePath("message")
-public class MessageWebSocketModuleHandler {
+@WSPath("/test")
+public class MessageWebSocketModuleHandler extends AbstractWebSocketHandler {
 
-    @WSModulePath("send")
-    public void onGetBooleanMessage(@JsonData SysUser sysUser) {
-
+    @WSPath("/test")
+    public String onGetBooleanMessage(String test) {
+        return "123";
     }
 }

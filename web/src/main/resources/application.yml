@@ -47,8 +47,6 @@ spring:
       #jdbc:
     #initialize-schema: never
 server:
-  servlet:
-    context-path: /api
   port: 8080
 mybatis-plus:
   global-config:

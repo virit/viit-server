@@ -56,17 +56,19 @@ public class SysAttachServiceImpl extends ServiceImpl<SysAttachMapper, SysAttach
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         String dir = userId + '/' + year + '/' + month + '/' + day + '/';
-        attachManager.addFile(dir, fileName, in);
+        String ext = getExt(fileName);
+        String randomFileName = IdWorker.get32UUID() + '.' + ext;
+        attachManager.addFile(dir, randomFileName, in);
         // 添加附件信息
         SysAttach attach = new SysAttach();
         attach.setName(fileName);
         attach.setUsed(false);
-        attach.setFilePath(dir);
+        attach.setFilePath(dir + randomFileName);
         attach.setLength(length);
         if (StringUtils.isBlank(groupId)) {
             attach.setGroupId(IdWorker.get32UUID());
         }
-        attach.setExt(getExt(fileName));
+        attach.setExt(ext);
         this.save(attach);
         return attach;
     }

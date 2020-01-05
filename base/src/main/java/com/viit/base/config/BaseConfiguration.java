@@ -3,8 +3,6 @@ package com.viit.base.config;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.viit.base.attach.AttachManager;
 import com.viit.base.attach.LocalAttachManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

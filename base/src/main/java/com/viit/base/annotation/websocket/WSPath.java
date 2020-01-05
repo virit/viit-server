@@ -6,14 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * websocket域
+ * websocket路径
  *
  * @author virit
  * @version 2019-12-05
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WSModulePath {
+public @interface WSPath {
 
     String value() default "";
 }

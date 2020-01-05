@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
 import com.viit.base.entity.WebSocketMessage;
 import com.viit.base.service.ClientWebSocketService;
-import com.viit.base.websocket.ClientWebSocketServer;
+import com.viit.base.websocket.CommonWebSocketServer;
+import com.viit.base.websocket.MessagePackage;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.function.Consumer;
 
 /**
  * websocket service实现类
@@ -21,10 +23,7 @@ public class ClientWebSocketServiceImpl implements ClientWebSocketService {
 
     @Override
     public void sendMessage(String id, String message) throws IOException {
-        ClientWebSocketServer client = ClientWebSocketServer.getByUid(id);
-        if (client != null) {
-            client.sendMessage(message);
-        }
+
     }
 
     @Override
@@ -53,5 +52,10 @@ public class ClientWebSocketServiceImpl implements ClientWebSocketService {
     @Override
     public void sendMessage(Collection<String> ids, WebSocketMessage webSocketMessage) throws IOException {
         sendMessages(ids, JSON.toJSONString(webSocketMessage));
+    }
+
+    @Override
+    public void sendMessage(String id, MessagePackage messagePackage, Consumer<?> consumer) throws IOException {
+
     }
 }

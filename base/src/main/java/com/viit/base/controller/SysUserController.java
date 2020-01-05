@@ -93,6 +93,7 @@ public class SysUserController {
      * 列表数据
      */
     @GetMapping("")
+    @JsonView(BaseProfile.class)
     @PreAuthorize("withAuthority('sys:user:view')")
     public RestData list(SysUserController.SysUserPageQuery pageQuery) {
         return FastCrudUtils.page(pageQuery, sysUserService);

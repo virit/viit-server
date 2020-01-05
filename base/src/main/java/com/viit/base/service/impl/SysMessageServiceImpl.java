@@ -61,11 +61,11 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
         }
         sysMessageItemService.saveBatch(items);
         // websocket进行推送
-        WebSocketMessage webSocketMessage = new WebSocketMessage();
-        webSocketMessage.setScope(Scope.MESSAGE_NEW);
-        webSocketMessage.setSendTime(DateUtils.currentDate());
-        webSocketMessage.setMessage(message);
-        clientWebSocketService.sendMessages(message.getToUsers(), message);
+//        WebSocketMessage webSocketMessage = new WebSocketMessage();
+//        webSocketMessage.setScope(Scope.MESSAGE_NEW);
+//        webSocketMessage.setSendTime(DateUtils.currentDate());
+//        webSocketMessage.setMessage(message);
+//        clientWebSocketService.sendMessages(message.getToUsers(), message);
     }
 
     @Override
