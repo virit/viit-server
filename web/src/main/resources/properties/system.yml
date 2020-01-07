@@ -1,0 +1,4 @@
+sys:
+  menus:
+    - {key: 10, value: 菜单}
+    - {key: 20, value: 按钮}

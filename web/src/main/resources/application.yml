@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  session:
+    store-type: redis
+    timeout: -1
+  redis:
+    url: redis://127.0.0.1:6379
+    database: 1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/viit_test?useUnicode=true&characterEncoding=utf-8&&serverTimezone=GMT%2B8
+    username: viit_test
+    password: 9999999
+  activiti:
+    # 自动建表
+    database-schema: ACTIVITI
+    database-schema-update: false
+    history-level: full
+    db-history-used: true
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: jdbc
+      #初始化表结构
+      #jdbc:
+    #initialize-schema: never
+server:
+  port: 8080
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted  #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
