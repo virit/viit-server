@@ -2,7 +2,7 @@ package com.viit.base.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.viit.base.config.SystemConfig;
-import com.viit.base.constant.SystemField;
+import com.viit.base.constants.SystemField;
 import com.viit.base.entity.SysAttach;
 import com.viit.base.entity.SysUser;
 import com.viit.base.io.AttachOutputModel;
@@ -16,12 +16,9 @@ import com.viit.base.utils.ContextUtils;
 import com.viit.base.utils.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 

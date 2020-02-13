@@ -1,7 +1,7 @@
 package com.viit.bpmf.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.viit.base.constant.SystemField;
+import com.viit.base.constants.SystemField;
 import com.viit.base.modelview.*;
 import com.viit.bpmf.entity.ModelEntityWrapper;
 import com.viit.bpmf.entity.ModelJson;
@@ -11,7 +11,6 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 

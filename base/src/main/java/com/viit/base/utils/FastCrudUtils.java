@@ -2,8 +2,7 @@ package com.viit.base.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.viit.base.constant.SystemColumn;
-import com.viit.base.constant.SystemField;
+import com.viit.base.constants.SystemColumn;
 import com.viit.base.lang.entity.IdEntity;
 import com.viit.base.modelview.*;
 import org.springframework.validation.BindingResult;

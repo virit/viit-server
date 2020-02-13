@@ -1,4 +1,4 @@
-package com.viit.base.constant;
+package com.viit.base.constants;
 
 /**
  * 系统固定列名

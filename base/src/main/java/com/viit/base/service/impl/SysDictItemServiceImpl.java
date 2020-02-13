@@ -3,7 +3,7 @@ package com.viit.base.service.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.viit.base.constant.SystemColumn;
+import com.viit.base.constants.SystemColumn;
 import com.viit.base.entity.SysDict;
 import com.viit.base.entity.SysDictItem;
 import com.viit.base.mapper.SysDictItemMapper;
