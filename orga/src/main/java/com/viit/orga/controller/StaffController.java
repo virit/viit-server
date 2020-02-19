@@ -5,7 +5,7 @@ import com.viit.base.modelview.RestData;
 import com.viit.base.modelview.SimpleRestData;
 import com.viit.orga.entity.Staff;
 import com.viit.orga.service.StaffService;
-import com.viit.base.utils.FastCrudUtils;
+import com.viit.base.util.FastCrudUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

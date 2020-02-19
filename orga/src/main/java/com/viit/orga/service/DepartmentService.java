@@ -1,7 +1,7 @@
 package com.viit.orga.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.viit.base.utils.objects.OrderObject;
+import com.viit.base.util.objects.OrderObject;
 import com.viit.orga.entity.Department;
 
 import java.util.List;

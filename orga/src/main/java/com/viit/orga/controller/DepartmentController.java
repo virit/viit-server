@@ -1,16 +1,15 @@
 package com.viit.orga.controller;
 
-import com.viit.base.controller.SysMenuController;
 import com.viit.base.modelview.PageQuery;
 import com.viit.base.modelview.RestData;
 import com.viit.base.modelview.SimpleRestData;
 import com.viit.base.modelview.dto.tree.AbstractTreeModel;
 import com.viit.base.modelview.dto.tree.TreeModel;
 import com.viit.base.modelview.dto.tree.TreeNode;
-import com.viit.base.utils.objects.OrderObject;
+import com.viit.base.util.FastCrudUtils;
+import com.viit.base.util.objects.OrderObject;
 import com.viit.orga.entity.Department;
 import com.viit.orga.service.DepartmentService;
-import com.viit.base.utils.FastCrudUtils;
 import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;

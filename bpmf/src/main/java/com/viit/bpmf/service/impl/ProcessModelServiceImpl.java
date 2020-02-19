@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Preconditions;
 import com.viit.base.service.SysDictService;
-import com.viit.base.utils.SysDictGather;
+import com.viit.base.service.util.SysDictGather;
 import com.viit.bpmf.constants.BpmfDictCode;
 import com.viit.bpmf.entity.ModelEntityWrapper;
 import com.viit.bpmf.entity.ModelJson;
@@ -18,7 +18,6 @@ import org.activiti.engine.repository.ModelQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,15 +1,15 @@
 package com.viit.orga.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.viit.base.constants.SysDictCode;
+import com.viit.base.entity.constant.SysDictCode;
+import com.viit.base.service.SysDictService;
+import com.viit.base.service.impl.FieldsInjectServiceImpl;
+import com.viit.base.service.util.SysDictGather;
 import com.viit.orga.entity.Department;
 import com.viit.orga.entity.Staff;
 import com.viit.orga.mapper.StaffMapper;
 import com.viit.orga.service.DepartmentService;
 import com.viit.orga.service.StaffService;
-import com.viit.base.service.impl.FieldsInjectServiceImpl;
-import com.viit.base.service.SysDictService;
-import com.viit.base.utils.SysDictGather;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

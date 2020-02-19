@@ -18,6 +18,13 @@
         <module>web</module>
         <module>orga</module>
         <module>bpmf</module>
+        <module>base-entity</module>
+        <module>base-api</module>
+        <module>base-entity</module>
+        <module>base-service</module>
+        <module>base-api</module>
+        <module>base-websocket</module>
+        <module>base-websocket</module>
     </modules>
 
     <groupId>com.viit</groupId>

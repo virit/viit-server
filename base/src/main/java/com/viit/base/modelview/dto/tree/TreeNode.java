@@ -1,7 +1,7 @@
 package com.viit.base.modelview.dto.tree;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.viit.base.utils.Setterable;
+import com.viit.base.util.Setterable;
 
 import java.util.*;
 

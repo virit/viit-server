@@ -1,7 +1,7 @@
 package com.viit.base.io;
 
-import com.viit.base.utils.ContextUtils;
-import com.viit.base.utils.IOUtils;
+import com.viit.base.util.IOUtils;
+import com.viit.base.util.ResponseUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
@@ -39,7 +39,7 @@ public class AbstractAttachOutputModel implements AttachOutputModel {
 
     @Override
     public void execute() {
-        HttpServletResponse response = ContextUtils.getResponse();
+        HttpServletResponse response = ResponseUtils.getResponse();
         if (response == null) {
             return;
         }

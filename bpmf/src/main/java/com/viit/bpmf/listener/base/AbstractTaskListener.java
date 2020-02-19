@@ -1,6 +1,6 @@
 package com.viit.bpmf.listener.base;
 
-import com.viit.base.utils.ContextUtils;
+import com.viit.base.util.ApplicationUtils;
 import org.activiti.engine.delegate.TaskListener;
 
 /**
@@ -12,6 +12,6 @@ import org.activiti.engine.delegate.TaskListener;
 public abstract class AbstractTaskListener implements TaskListener {
 
     public AbstractTaskListener() {
-        ContextUtils.autowireBean(this);
+        ApplicationUtils.autowireBean(this);
     }
 }

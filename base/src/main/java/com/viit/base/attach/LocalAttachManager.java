@@ -1,6 +1,6 @@
 package com.viit.base.attach;
 
-import com.viit.base.utils.IOUtils;
+import com.viit.base.util.IOUtils;
 
 import java.io.*;
 
